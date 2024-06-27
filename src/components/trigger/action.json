@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_tool_actions",
+  "info": {
+    "displayName": "Action",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {}
+}

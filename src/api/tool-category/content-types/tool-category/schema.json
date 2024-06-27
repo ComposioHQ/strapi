@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tool_categories",
+  "info": {
+    "singularName": "tool-category",
+    "pluralName": "tool-categories",
+    "displayName": "tool_category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "category",
+        "tags"
+      ]
+    },
+    "tools": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tool.tool",
+      "mappedBy": "tool_categories"
+    }
+  }
+}

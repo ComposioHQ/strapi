@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tools",
+  "info": {
+    "singularName": "tool",
+    "pluralName": "tools",
+    "displayName": "tool",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "unique_id": {
+      "type": "string"
+    },
+    "tool_type": {
+      "type": "string"
+    },
+    "Tool": {
+      "displayName": "Action",
+      "type": "component",
+      "repeatable": true,
+      "component": "trigger.action"
+    },
+    "Trigger": {
+      "displayName": "Trigger",
+      "type": "component",
+      "repeatable": true,
+      "component": "trigger.trigger"
+    },
+    "tool_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tool-category.tool-category",
+      "inversedBy": "tools"
+    },
+    "examples": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::playground-example.playground-example",
+      "mappedBy": "tools"
+    },
+    "isPublic": {
+      "type": "boolean"
+    }
+  }
+}
