@@ -47,6 +47,28 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "tools"
+    },
+    "description": {
+      "type": "text"
+    },
+    "tool_type": {
+      "type": "enumeration",
+      "enum": [
+        "local",
+        "api"
+      ]
+    },
+    "website_link": {
+      "type": "string"
+    },
+    "playground_config": {
+      "type": "string"
+    },
+    "FAQ": {
+      "displayName": "FAQ",
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
     }
   }
 }

@@ -26,6 +26,26 @@
     },
     "config_url": {
       "type": "text"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "playground_examples"
+    },
+    "imageURL": {
+      "type": "string"
+    },
+    "unique_id": {
+      "type": "string"
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "red",
+        "purple",
+        "green"
+      ]
     }
   }
 }

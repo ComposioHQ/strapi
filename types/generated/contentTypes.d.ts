@@ -788,31 +788,32 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiPlaygroundCategoryPlaygroundCategory
-  extends Schema.CollectionType {
-  collectionName: 'playground_categories';
+export interface ApiGlobalGlobal extends Schema.SingleType {
+  collectionName: 'globals';
   info: {
-    singularName: 'playground-category';
-    pluralName: 'playground-categories';
-    displayName: 'playground_category';
+    singularName: 'global';
+    pluralName: 'globals';
+    displayName: 'global';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
-    description: Attribute.Text;
+    launchText: Attribute.String;
+    launchLink: Attribute.String;
+    launchEmoji: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::playground-category.playground-category',
+      'api::global.global',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::playground-category.playground-category',
+      'api::global.global',
       'oneToOne',
       'admin::user'
     > &
@@ -841,6 +842,14 @@ export interface ApiPlaygroundExamplePlaygroundExample
       'api::tool.tool'
     >;
     config_url: Attribute.Text;
+    tags: Attribute.Relation<
+      'api::playground-example.playground-example',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    imageURL: Attribute.String;
+    unique_id: Attribute.String;
+    color: Attribute.Enumeration<['red', 'purple', 'green']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -865,6 +874,7 @@ export interface ApiTagTag extends Schema.CollectionType {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'Tag';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -874,6 +884,12 @@ export interface ApiTagTag extends Schema.CollectionType {
     type: Attribute.Enumeration<['tooltype', 'usecasetype']>;
     description: Attribute.Text;
     tools: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::tool.tool'>;
+    playground_examples: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::playground-example.playground-example'
+    >;
+    faq: Attribute.Component<'faq.faq', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -908,6 +924,11 @@ export interface ApiToolTool extends Schema.CollectionType {
     >;
     isPublic: Attribute.Boolean;
     tags: Attribute.Relation<'api::tool.tool', 'manyToMany', 'api::tag.tag'>;
+    description: Attribute.Text;
+    tool_type: Attribute.Enumeration<['local', 'api']>;
+    website_link: Attribute.String;
+    playground_config: Attribute.String;
+    FAQ: Attribute.Component<'faq.faq', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -936,7 +957,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::playground-category.playground-category': ApiPlaygroundCategoryPlaygroundCategory;
+      'api::global.global': ApiGlobalGlobal;
       'api::playground-example.playground-example': ApiPlaygroundExamplePlaygroundExample;
       'api::tag.tag': ApiTagTag;
       'api::tool.tool': ApiToolTool;

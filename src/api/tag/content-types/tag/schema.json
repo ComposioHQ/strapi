@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tag",
     "pluralName": "tags",
-    "displayName": "Tag"
+    "displayName": "Tag",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,6 +30,17 @@
       "relation": "manyToMany",
       "target": "api::tool.tool",
       "mappedBy": "tags"
+    },
+    "playground_examples": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::playground-example.playground-example",
+      "mappedBy": "tags"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
     }
   }
 }
