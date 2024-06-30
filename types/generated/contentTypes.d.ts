@@ -840,6 +840,7 @@ export interface ApiPlaygroundExamplePlaygroundExample
       'manyToMany',
       'api::tool.tool'
     >;
+    config_url: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -854,6 +855,31 @@ export interface ApiPlaygroundExamplePlaygroundExample
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    slug: Attribute.String;
+    type: Attribute.Enumeration<['tooltype', 'usecasetype']>;
+    description: Attribute.Text;
+    tools: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::tool.tool'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -873,61 +899,21 @@ export interface ApiToolTool extends Schema.CollectionType {
     name: Attribute.String;
     logo: Attribute.String;
     unique_id: Attribute.String;
-    tool_type: Attribute.String;
-    Tool: Attribute.Component<'trigger.action', true>;
+    Action: Attribute.Component<'trigger.action', true>;
     Trigger: Attribute.Component<'trigger.trigger', true>;
-    tool_categories: Attribute.Relation<
-      'api::tool.tool',
-      'manyToMany',
-      'api::tool-category.tool-category'
-    >;
     examples: Attribute.Relation<
       'api::tool.tool',
       'manyToMany',
       'api::playground-example.playground-example'
     >;
     isPublic: Attribute.Boolean;
+    tags: Attribute.Relation<'api::tool.tool', 'manyToMany', 'api::tag.tag'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiToolCategoryToolCategory extends Schema.CollectionType {
-  collectionName: 'tool_categories';
-  info: {
-    singularName: 'tool-category';
-    pluralName: 'tool-categories';
-    displayName: 'tool_category';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    type: Attribute.Enumeration<['category', 'tags']>;
-    tools: Attribute.Relation<
-      'api::tool-category.tool-category',
-      'manyToMany',
-      'api::tool.tool'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tool-category.tool-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tool-category.tool-category',
-      'oneToOne',
-      'admin::user'
-    > &
       Attribute.Private;
   };
 }
@@ -952,8 +938,8 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::playground-category.playground-category': ApiPlaygroundCategoryPlaygroundCategory;
       'api::playground-example.playground-example': ApiPlaygroundExamplePlaygroundExample;
+      'api::tag.tag': ApiTagTag;
       'api::tool.tool': ApiToolTool;
-      'api::tool-category.tool-category': ApiToolCategoryToolCategory;
     }
   }
 }

@@ -21,10 +21,7 @@
     "unique_id": {
       "type": "string"
     },
-    "tool_type": {
-      "type": "string"
-    },
-    "Tool": {
+    "Action": {
       "displayName": "Action",
       "type": "component",
       "repeatable": true,
@@ -36,12 +33,6 @@
       "repeatable": true,
       "component": "trigger.trigger"
     },
-    "tool_categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tool-category.tool-category",
-      "inversedBy": "tools"
-    },
     "examples": {
       "type": "relation",
       "relation": "manyToMany",
@@ -50,6 +41,12 @@
     },
     "isPublic": {
       "type": "boolean"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "tools"
     }
   }
 }
