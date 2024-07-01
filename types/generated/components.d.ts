@@ -4,10 +4,11 @@ export interface FaqFaq extends Schema.Component {
   collectionName: 'components_faq_faqs';
   info: {
     displayName: 'FAQ';
+    description: '';
   };
   attributes: {
     question: Attribute.String;
-    answer: Attribute.String;
+    answer: Attribute.Text;
   };
 }
 
