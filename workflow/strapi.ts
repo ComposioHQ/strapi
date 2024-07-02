@@ -16,8 +16,7 @@ export async function strapi(url: string) {
 }
 
 
-
-export const addApp = async (app:{
+export const createOrUpdateApp = async (app:{
     name: string,
     logo: string,
     unique_id: string,
@@ -29,7 +28,7 @@ export const addApp = async (app:{
     triggers: { name: string, unique_id: string, desc: string, tag: string }[],
     examples: { name: string, description: string, imageURL: string, unique_id: string, color: string }[],
     tags: { slug: string, type: string, description: string }[],
-    FAQ: { question: string, answer: string }[],
+    FAQ?: { question: string, answer: string }[],
 }, id?: number) => {
 
     const data = {

@@ -1,10 +1,16 @@
 
-import { addApp } from './strapi';
+import { createOrUpdateApp, getApp } from './strapi';
+import { getFAQForTools } from './claude';
 
 async function main() {
-    // const apps = await getApps();
-    // console.log(apps);
-    addApp({
+    const app = await getApp("slack");
+
+
+    let FAQ;
+    if(!app){
+        FAQ = await getFAQForTools('slack', {});
+    }
+    createOrUpdateApp({
         name: '7new',
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPLeFIomqX-ERD64nb6ZBVbuL8H90IuyA3uw&s',
         unique_id: 'slack',
@@ -26,11 +32,8 @@ async function main() {
         }],
         examples: [],
         tags: [],
-        FAQ: [{
-            question: 'What is check name',
-            answer: 'My name is test'
-        }],
-    },7)
+       ...(!app.id ? {FAQ: FAQ} : {})
+    },app.id)
 }
 
 main();
