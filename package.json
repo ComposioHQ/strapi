@@ -9,23 +9,26 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-i18n": "4.15.0",
-    "@strapi/plugin-users-permissions": "4.15.0",
-    "@strapi/provider-upload-cloudinary": "4.15.0",
-    "@strapi/strapi": "4.15.0",
-    "pg": "8.11.3"
+    "@anthropic-ai/sdk": "^0.24.3",
+    "@strapi/plugin-i18n": "4.23.1",
+    "@strapi/plugin-users-permissions": "4.23.1",
+    "@strapi/provider-upload-cloudinary": "4.23.1",
+    "@strapi/strapi": "4.23.1",
+    "axios": "^1.7.2",
+    "openai": "^4.52.3",
+    "pg": "8.11.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.11",
+    "zod-to-json-schema": "^3.23.1"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
     "uuid": "35d7a084-3088-4d0b-869e-f503693ee8e5"
-  },
-  "engines": {
-    "node": ">=16.x.x",
-    "npm": ">=6.0.0"
   },
   "license": "MIT"
 }

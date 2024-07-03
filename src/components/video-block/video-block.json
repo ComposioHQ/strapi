@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_video_block_video_blocks",
+  "info": {
+    "displayName": "video_block"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    },
+    "video_url": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "string"
+    }
+  }
+}

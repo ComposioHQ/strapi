@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_feature_box_feature_sections",
+  "info": {
+    "displayName": "feature_section",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

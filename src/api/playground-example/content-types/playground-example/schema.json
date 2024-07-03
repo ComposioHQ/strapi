@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "playground_examples",
+  "info": {
+    "singularName": "playground-example",
+    "pluralName": "playground-examples",
+    "displayName": "playground_example",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "tools": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tool.tool",
+      "inversedBy": "examples"
+    },
+    "config_url": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "playground_examples"
+    },
+    "imageURL": {
+      "type": "string"
+    },
+    "unique_id": {
+      "type": "string"
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "red",
+        "purple",
+        "green"
+      ]
+    }
+  }
+}

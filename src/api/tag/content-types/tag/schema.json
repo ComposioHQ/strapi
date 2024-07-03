@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tags",
+  "info": {
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "tooltype",
+        "usecasetype"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "tools": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tool.tool",
+      "mappedBy": "tags"
+    },
+    "playground_examples": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::playground-example.playground-example",
+      "mappedBy": "tags"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

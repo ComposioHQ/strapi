@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_guide_box_guide_boxes",
+  "info": {
+    "displayName": "guide_box"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

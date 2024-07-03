@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_tools_section_tools_sections",
+  "info": {
+    "displayName": "tools_section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

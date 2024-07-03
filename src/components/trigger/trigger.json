@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_trigger_triggers",
+  "info": {
+    "displayName": "Trigger",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "unique_id": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    }
+  }
+}

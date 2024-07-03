@@ -1,0 +1,64 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "global",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "launchText": {
+      "type": "string"
+    },
+    "launchLink": {
+      "type": "string"
+    },
+    "launchEmoji": {
+      "type": "string"
+    },
+    "cover": {
+      "displayName": "cover",
+      "type": "component",
+      "repeatable": false,
+      "component": "cover.cover"
+    },
+    "guide_box": {
+      "displayName": "guide_box",
+      "type": "component",
+      "repeatable": false,
+      "component": "guide-box.guide-box"
+    },
+    "tools_section": {
+      "displayName": "tools_section",
+      "type": "component",
+      "repeatable": false,
+      "component": "tools-section.tools-section"
+    },
+    "video_block": {
+      "displayName": "video_block",
+      "type": "component",
+      "repeatable": false,
+      "component": "video-block.video-block"
+    },
+    "cta_section": {
+      "displayName": "cta_section",
+      "type": "component",
+      "repeatable": false,
+      "component": "cta-section.cta-section"
+    },
+    "feature_block": {
+      "displayName": "feature_section",
+      "type": "component",
+      "repeatable": true,
+      "component": "feature-box.feature-section"
+    },
+    "meta_tags": {
+      "type": "text"
+    }
+  }
+}

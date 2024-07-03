@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_cover_covers",
+  "info": {
+    "displayName": "cover",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "features_block": {
+      "type": "string"
+    },
+    "playground_tip": {
+      "type": "string"
+    }
+  }
+}
