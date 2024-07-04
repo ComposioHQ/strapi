@@ -1,7 +1,7 @@
 import { generateFAQForType} from "../claude";
 import { createOrUpdateTag, findTag } from "../strapi";
 
-const useCaseTagsToCreate: {slug: string, name: string, type: "usecasetype" | "tooltype", description: string}[] = [{
+const TAGS_TO_CREATE: {slug: string, name: string, type: "usecasetype" | "tooltype", description: string}[] = [{
   slug: "coding-review-assistant",
   name: "Coding Review Assistant",
   type: "usecasetype",
@@ -10,7 +10,7 @@ const useCaseTagsToCreate: {slug: string, name: string, type: "usecasetype" | "t
 
 
 (async () => {
-    for (const tag of useCaseTagsToCreate) {
+    for (const tag of TAGS_TO_CREATE) {
         const existingTag = await findTag(tag.slug);
         const faq = await generateFAQForType(tag.name);
         await createOrUpdateTag({
