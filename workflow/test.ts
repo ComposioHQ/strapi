@@ -1,5 +1,5 @@
-import { getACtionsNTriggers, getFAQForTools, getToolsForUseCase, getUseCasesForTheme } from "./claude";
-import { createTag } from "./strapi";
+import { getActionsNTriggers, getFAQForTools, getToolsForUseCase, getUseCasesForTheme } from "./claude";
+import { createOrUpdateTag } from "./strapi";
 
 
 (async () => {
@@ -9,7 +9,7 @@ import { createTag } from "./strapi";
     // //const faq = await getFAQForTools("Developer productivity", {});
     // console.log(useCases);
 
-    await createTag({
+    await createOrUpdateTag({
         slug: "coding-review-assistant",
         name: "Coding Review Assistant",
         type: "usecaseType",

@@ -49,8 +49,7 @@ export const getFAQForTools = async (toolsName: string, tools: any) => {
 
 };
 
-
-export const getACtionsNTriggers = async (toolsName: string, tools: any) => {
+export const getActionsNTriggers = async (toolsName: string): Promise<{items:{name:string,description:string; type:string,unique_id:string}[]}> => {
     console.log(`List relevant 20 actions and triggers for ${toolsName}`)
     const params: Anthropic.MessageCreateParams = {
         max_tokens: 4096,
@@ -67,10 +66,10 @@ export const getACtionsNTriggers = async (toolsName: string, tools: any) => {
                             "items": {
                                 "type": "object",
                                 "properties": {
-                                    //"unique_id": { "type": "string", "description": "unique id for the action or trigger" },
+                                    "unique_id": { "type": "string", "description": "unique id for the action or trigger" },
                                     "name": { "type": "string", "description": "name of the action or trigger" },
                                     "description": { "type": "string", "description": "description of the action or trigger under 60 words" },
-                                    // "type": { "type": "string", "description": "type of the action or trigger" },
+                                     "type": { "type": "string", "description": "type of the action or trigger" },
                                 },
                                 "required": ["name"]
                             },
@@ -98,7 +97,6 @@ export const getACtionsNTriggers = async (toolsName: string, tools: any) => {
     //@ts-ignore
     return message.content[0].input;
 };
-
 
 export const getUseCasesForTheme = async (theme: string, tools: any) => {
     console.log(`List relevant use cases for ${theme}`)
@@ -192,4 +190,93 @@ export const getToolsForUseCase = async (useCase: string, tools: any) => {
     const message: Anthropic.Message = await anthropic.messages.create(params);
     //@ts-ignore
     return message.content[0].input;
+};
+
+
+export const generateFAQForType = async (categoryType: string) => {
+    const params: Anthropic.MessageCreateParams = {
+        max_tokens: 1024,
+        model: 'claude-3-opus-20240229',
+        tools: [
+            {
+                "name": "get_faq",
+                "description": "Get the FAQs for a given theme",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "faq_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "question": { "type": "string", "description": "question" },
+                                    "answer": { "type": "string", "description": "answer" },
+                                },
+                                "required": ["question", "answer"]
+                            },
+                            "description": "FAQ list"
+                        },
+
+                    },
+                    "required": ["faq_list"]
+                }
+            }
+        ],
+        "tool_choice": { "type": "tool", "name": "get_faq" },
+        messages: [{ role: 'user', content: `Hi` }, {
+            role: 'assistant',
+            content: `You are assistant that copywrites for Composio. Composio make it easy to build AI agent using code, and it provides tools for agentic framework like CrewAI, langchain and works with openAI, claude and other LLM.`,
+        }, {
+            role: 'user',
+            content: `Generate relevant 2 FAQs for ${categoryType}`
+        }],
+    };
+    const message: Anthropic.Message = await anthropic.messages.create(params);
+    //@ts-ignore
+    return message.content[0].input.faq_list;
+
+};
+
+export const generateFAQForExample = async (example: string) => {
+    const params: Anthropic.MessageCreateParams = {
+        max_tokens: 1024,
+        model: 'claude-3-opus-20240229',
+        tools: [
+            {
+                "name": "get_faq",
+                "description": "Get the FAQs for a given theme",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "faq_list": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "question": { "type": "string", "description": "question" },
+                                    "answer": { "type": "string", "description": "answer" },
+                                },
+                                "required": ["question", "answer"]
+                            },
+                            "description": "FAQ list"
+                        },
+
+                    },
+                    "required": ["faq_list"]
+                }
+            }
+        ],
+        "tool_choice": { "type": "tool", "name": "get_faq" },
+        messages: [{ role: 'user', content: `Hi` }, {
+            role: 'assistant',
+            content: `You are assistant that copywrites for Composio. Composio make it easy to build AI agent using code, and it provides tools for agentic framework like CrewAI, langchain and works with openAI, claude and other LLM.`,
+        }, {
+            role: 'user',
+            content: `Generate relevant 2 FAQs for ${example}`
+        }],
+    };
+    const message: Anthropic.Message = await anthropic.messages.create(params);
+    //@ts-ignore
+    return message.content[0].input.faq_list;
+
 };

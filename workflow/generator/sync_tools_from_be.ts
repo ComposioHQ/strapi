@@ -1,7 +1,6 @@
 
-import { createOrUpdateApp, getApp } from './strapi';
-import { getFAQForTools } from './claude';
-import { getAppsFromBE, getAppFromBE, getActionsFromBE, getTriggersFromBE } from './getApps';
+import { createOrUpdateApp, getApp } from '../strapi';
+import { getAppsFromBE, getAppFromBE, getActionsFromBE, getTriggersFromBE } from '../getApps';
 
 async function main() {
     const apps = await getAppsFromBE();

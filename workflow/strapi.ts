@@ -8,6 +8,7 @@ const commonHeaders = {
         Authorization: `Bearer d12b4692cff05d0912408c2fc490210fbfa5ec29a8892d339cde3d2560938df7f48c4a714e8f97a00f358f9abeeaec2489c84691b8c049705d7a37a3cad331476ba35ba3743b83a793174313d6e45d36464d97ac96389596892ab207228277e7d90d703d75013e4f7079277598964efb583da24c82345a83b69d92e4a7eba81e`,
     },
 }
+const strapiUrl = process.env.STRAPI_URL || "http://127.0.0.1:1337";
 export async function strapi(url: string) {
     const STRAPI_URL = process.env.STRAPI_URL || "http://127.0.0.1:1337";
     const { data } = await axios.get(STRAPI_URL + url, commonHeaders);
@@ -54,18 +55,35 @@ export const createOrUpdateApp = async (app:{
 }
 
 export const getApp = async (uniqueId: string) => {
-    const { data: response } = await axios.get(`https://cms.composio.dev/api/tools?filters[unique_id][$eq]=${uniqueId}`, commonHeaders);
+    const { data: response } = await axios.get(`${strapiUrl}/api/tools?filters[unique_id][$eq]=${uniqueId}`, commonHeaders);
     return response.data[0];
 }
 
-export const createTag = async (data: {slug:string, name: string, type: string, description: string,faq: {question: string, answer: string}[] }) => {
-    const { data: response } = await axios.post(`http://127.0.0.1:1337/api/tags`, { data }, commonHeaders);
-    console.log(response);
+export const findTag = async (slug: string) => {
+    const { data: response } = await axios.get(`${strapiUrl}/api/tags?filters[slug][$eq]=${slug}`, commonHeaders);
+    return response.data[0];
+}
+
+export const createOrUpdateTag = async (data: {slug:string, name: string, type: string, description: string,faq: {question: string, answer: string}[] },id?:number) => {
+    const { data: response } = await axios[id ? 'put' : 'post'](`${strapiUrl}/api/tags${id ? `/${id}` : ''}`, { data }, commonHeaders);
     return response;
 }
 
-export const createPlaygroundExample = async (playgroundConfig: { name: string, description: string, config: string }) => {
-    const { data: response } = await axios.post(`http://127.0.0.1:1337/api/playground-configs`, playgroundConfig, commonHeaders);
+export const createOrUpdatePlaygroundExample = async (data: {
+    name: string,
+    description: string,
+    config_url: string,
+    imageURL: string,
+    unique_id: string,
+    color: 'red' | 'green' | 'blue' | 'yellow' | 'purple' | 'orange' | 'pink' | 'teal' | 'gray',
+}, id?: number) => {
+    const { data: response } = await axios[id ? 'put' : 'post'](`${strapiUrl}/api/playground-examples${id ? `/${id}` : ''}`, {data}, commonHeaders);
     return response;
+}
+
+
+export const getPlaygroundExample = async (uniqueId: string) => {
+    const { data: response } = await axios.get(`${strapiUrl}/api/playground-examples?filters[unique_id][$eq]=${uniqueId}`, commonHeaders);
+    return response.data[0];
 }
 
