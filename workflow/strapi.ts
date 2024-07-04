@@ -5,7 +5,7 @@ import axios from 'axios';
 const commonHeaders = {
     headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer d12b4692cff05d0912408c2fc490210fbfa5ec29a8892d339cde3d2560938df7f48c4a714e8f97a00f358f9abeeaec2489c84691b8c049705d7a37a3cad331476ba35ba3743b83a793174313d6e45d36464d97ac96389596892ab207228277e7d90d703d75013e4f7079277598964efb583da24c82345a83b69d92e4a7eba81e`,
+        Authorization: `Bearer ${process.env.STRAPI_TOKEN}`,
     },
 }
 const strapiUrl = process.env.STRAPI_URL || "http://127.0.0.1:1337";
