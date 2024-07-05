@@ -46,6 +46,11 @@
         "purple",
         "green"
       ]
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
     }
   }
 }

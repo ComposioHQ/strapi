@@ -272,7 +272,7 @@ export const generateFAQForExample = async (example: string) => {
             content: `You are assistant that copywrites for Composio. Composio make it easy to build AI agent using code, and it provides tools for agentic framework like CrewAI, langchain and works with openAI, claude and other LLM.`,
         }, {
             role: 'user',
-            content: `Generate relevant 2 FAQs for ${example}`
+            content: `Generate relevant 8 FAQs for ${example} composio and the example on more on technical aspect of building this tool.`
         }],
     };
     const message: Anthropic.Message = await anthropic.messages.create(params);

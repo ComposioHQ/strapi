@@ -857,6 +857,7 @@ export interface ApiPlaygroundExamplePlaygroundExample
     imageURL: Attribute.String;
     unique_id: Attribute.String;
     color: Attribute.Enumeration<['red', 'purple', 'green']>;
+    faq: Attribute.Component<'faq.faq', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
