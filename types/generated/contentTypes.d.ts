@@ -899,6 +899,7 @@ export interface ApiTagTag extends Schema.CollectionType {
     >;
     faq: Attribute.Component<'faq.faq', true>;
     name: Attribute.String;
+    emoji: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -938,12 +939,59 @@ export interface ApiToolTool extends Schema.CollectionType {
     website_link: Attribute.String;
     playground_config: Attribute.String;
     FAQ: Attribute.Component<'faq.faq', true>;
+    tools_combos: Attribute.Relation<
+      'api::tool.tool',
+      'oneToMany',
+      'api::tools-combo.tools-combo'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::tool.tool', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiToolsComboToolsCombo extends Schema.CollectionType {
+  collectionName: 'tools_combos';
+  info: {
+    singularName: 'tools-combo';
+    pluralName: 'tools-combos';
+    displayName: 'tools_combo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    unique_id: Attribute.String;
+    first_tool: Attribute.Relation<
+      'api::tools-combo.tools-combo',
+      'manyToOne',
+      'api::tool.tool'
+    >;
+    second_tool: Attribute.Relation<
+      'api::tools-combo.tools-combo',
+      'manyToOne',
+      'api::tool.tool'
+    >;
+    description: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tools-combo.tools-combo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tools-combo.tools-combo',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -970,6 +1018,7 @@ declare module '@strapi/types' {
       'api::playground-example.playground-example': ApiPlaygroundExamplePlaygroundExample;
       'api::tag.tag': ApiTagTag;
       'api::tool.tool': ApiToolTool;
+      'api::tools-combo.tools-combo': ApiToolsComboToolsCombo;
     }
   }
 }

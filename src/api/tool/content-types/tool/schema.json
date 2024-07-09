@@ -69,6 +69,12 @@
       "type": "component",
       "repeatable": true,
       "component": "faq.faq"
+    },
+    "tools_combos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tools-combo.tools-combo",
+      "mappedBy": "first_tool"
     }
   }
 }
