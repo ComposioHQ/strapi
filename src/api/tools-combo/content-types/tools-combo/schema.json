@@ -29,6 +29,14 @@
     },
     "description": {
       "type": "string"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "faq.faq"
+    },
+    "action_links": {
+      "type": "text"
     }
   }
 }

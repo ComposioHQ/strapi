@@ -978,6 +978,8 @@ export interface ApiToolsComboToolsCombo extends Schema.CollectionType {
       'api::tool.tool'
     >;
     description: Attribute.String;
+    faq: Attribute.Component<'faq.faq', true>;
+    action_links: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
