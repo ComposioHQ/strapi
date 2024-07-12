@@ -1,5 +1,17 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ActionLinkActionLinks extends Schema.Component {
+  collectionName: 'components_action_link_action_links';
+  info: {
+    displayName: 'action_links';
+    description: '';
+  };
+  attributes: {
+    unique_id: Attribute.String;
+    name: Attribute.String;
+  };
+}
+
 export interface CoverCover extends Schema.Component {
   collectionName: 'components_cover_covers';
   info: {
@@ -116,6 +128,7 @@ export interface VideoBlockVideoBlock extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'action-link.action-links': ActionLinkActionLinks;
       'cover.cover': CoverCover;
       'cta-section.cta-section': CtaSectionCtaSection;
       'faq.faq': FaqFaq;

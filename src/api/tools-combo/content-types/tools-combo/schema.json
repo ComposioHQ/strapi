@@ -35,8 +35,11 @@
       "repeatable": true,
       "component": "faq.faq"
     },
-    "action_links": {
-      "type": "text"
+    "action_link": {
+      "displayName": "action_links",
+      "type": "component",
+      "repeatable": true,
+      "component": "action-link.action-links"
     }
   }
 }

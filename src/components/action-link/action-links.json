@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_action_link_action_links",
+  "info": {
+    "displayName": "action_links",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "unique_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

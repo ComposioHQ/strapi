@@ -979,7 +979,7 @@ export interface ApiToolsComboToolsCombo extends Schema.CollectionType {
     >;
     description: Attribute.String;
     faq: Attribute.Component<'faq.faq', true>;
-    action_links: Attribute.Text;
+    action_link: Attribute.Component<'action-link.action-links', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
