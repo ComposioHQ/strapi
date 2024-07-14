@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 
 const anthropic = new Anthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY 
+    apiKey: process.env.ANTHROPIC_API_KEY
 });
 
 export const getFAQForTools = async (toolsName: string, tools: any) => {
@@ -49,11 +49,49 @@ export const getFAQForTools = async (toolsName: string, tools: any) => {
 
 };
 
+
+export const getToolDescription = async (toolName: string): Promise<{ description: string; website_link: string }> => {
+    console.log(`Getting description and website link for ${toolName}`)
+    const params: Anthropic.MessageCreateParams = {
+        max_tokens: 1024,
+        model: 'claude-3-haiku-20240307',
+        tools: [
+            {
+                "name": "get_tool_info",
+                "description": "Get the description and website link for a given tool",
+                "input_schema": {
+                    "type": "object",
+                    "properties": {
+                        "description": { "type": "string", "description": "A brief description of the tool" },
+                        "website_link": { "type": "string", "description": "The official website link for the tool" }
+                    },
+                    "required": ["description", "website_link"]
+                }
+            }
+        ],
+        "tool_choice": { "type": "tool", "name": "get_tool_info" },
+        messages: [
+            { role: 'user', content: `Hi` },
+            {
+                role: 'assistant',
+                content: `You are an AI assistant tasked with providing information about various software tools and services.`,
+            },
+            {
+                role: 'user',
+                content: `Provide a brief description and the official website link for ${toolName}`
+            }
+        ],
+    };
+    const message: Anthropic.Message = await anthropic.messages.create(params);
+    //@ts-ignore
+    return message.content[0].input;
+};
+
 export const getActionsNTriggers = async (toolsName: string): Promise<{items:{name:string,description:string; type:string,unique_id:string}[]}> => {
     console.log(`List relevant 20 actions and triggers for ${toolsName}`)
     const params: Anthropic.MessageCreateParams = {
         max_tokens: 4096,
-        model: 'claude-3-haiku-20240307',
+        model: 'claude-3-5-sonnet-20240620',
         tools: [
             {
                 "name": "get_actions_triggers",

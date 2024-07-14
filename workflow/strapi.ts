@@ -27,7 +27,7 @@ export const createOrUpdateApp = async (app:{
     actions: { name: string, desc: string, tag: string, unique_id: string }[],
     triggers: { name: string, unique_id: string, desc: string, tag: string }[],
     examples: { name: string, description: string, imageURL: string, unique_id: string, color: string }[],
-    tags: { slug: string, type: string, description: string }[],
+    tags: number[],
     FAQ?: { question: string, answer: string }[],
 }, id?: number) => {
 
@@ -42,15 +42,16 @@ export const createOrUpdateApp = async (app:{
         "playground_config": app.playground_config,
         "Action": app.actions,
         "Trigger": app.triggers,
-        "tags": [],
+        "tags": app.tags,
         "FAQ": app.FAQ,
     };
+
     try {
         const { data: response } = await axios[id ? 'put' : 'post'](`https://cms.composio.dev/api/tools${id ? `/${id}` : ''}`, {data}, commonHeaders);
         return response;
     } catch (error) {
-        console.error(error);
-        throw error;
+       console.log(`Could not create or update app ${app.name}`, error);
+        // throw error;
     }
 }
 
