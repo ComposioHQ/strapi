@@ -1,5 +1,3 @@
-
-
 import { createOrUpdateToolCombo, getToolCombo, getTools } from '../strapi';
 
 // Sort an array of objects by their unique_id attribute
@@ -30,25 +28,35 @@ async function processBatch(batch: any[]) {
         }
 
         console.log("✨ Creating tool combo", name);
-        return createOrUpdateToolCombo({ unique_id: name, description: desc, first_tool: firstToolId, second_tool: secondToolId }, toolCombo?.id);
+        return createOrUpdateToolCombo({ 
+            unique_id: name, 
+            description: desc, 
+            first_tool: firstToolId, 
+            second_tool: secondToolId 
+        }, toolCombo?.id);
     }));
 
     return results.filter(result => result !== null);
 }
 
+// Promise-based sleep function
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 // Main function to generate all tool combos
 async function main() {
     const tools = await getTools();
-    const batchSize = 7;
-    let batch = [];
+    const batchSize = 30;
+    let batch: ReturnType<typeof generateToolCombo>[] = [];
 
-    for (let i = 0; i < tools.length; i++) {
+    for (let i = 40; i < tools.length; i++) {
         for (let j = i + 1; j < tools.length; j++) {
             batch.push(generateToolCombo(tools[i], tools[j]));
 
             if (batch.length === batchSize) {
                 await processBatch(batch);
                 batch = [];
+                // Wait for 5 seconds before processing the next batch
+                await sleep(5000);
             }
         }
     }
