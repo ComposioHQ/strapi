@@ -18,4 +18,17 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  'strapi-algolia': {
+    enabled: true,
+    config: {
+      apiKey: '336b72a5a62fc1c29cc90d6fce21a6c9',
+      applicationId: '4XKHY9LF3A',
+      contentTypes: [
+        { name: 'api::tool.tool' },
+        { name: 'api::tag.tag' },
+        { name: 'api::tools-combo.tools-combo' },
+        { name: 'api::playground-example.playground-example' },
+      ],
+    },
+  }
 });

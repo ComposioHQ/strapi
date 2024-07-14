@@ -104,3 +104,9 @@ export const getPlaygroundExample = async (uniqueId: string) => {
     return response.data[0];
 }
 
+
+export const getPlaygroundExampleByID = async (id: number) => {
+    const { data: response } = await axios.get(`${strapiUrl}/api/playground-examples?filters[id][$eq]=${id}`, commonHeaders);
+    return response.data[0];
+}
+
