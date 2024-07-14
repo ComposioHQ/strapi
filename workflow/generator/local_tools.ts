@@ -1,17 +1,18 @@
 import { createOrUpdateApp, getApp } from '../strapi';
 import { getActionsNTriggers, getToolDescription } from '../claude';
 
-const generateUniqueId = (app: string) => {
-    return app.toLowerCase().replace(/\s/g, "_");
-};
+// Generate a unique ID for an app by converting its name to lowercase and replacing spaces with underscores
+const generateUniqueId = (app: string): string => app.toLowerCase().replace(/\s/g, "_");
 
-const commerceApps = [
+// List of local tools to be created
+const localTools = [
     "CodeIndex", "CodeFormat", "CodeGrep", "CodeMap", "Embed",
     "Mathematical", "File", "Greptile", "Rag", "FileEdit",
     "Search", "GitCmd", "HistoryFetcher", "ShellExec", "Spider",
     "Sql", "Web", "Zep"
 ];
 
+// List of all available actions for the tools
 const actions = [
     "CODEFORMAT_FORMAT_AND_LINT_CODEBASE",
     "CODEGREP_SEARCH_CODEBASE",
@@ -54,11 +55,13 @@ const actions = [
     "ZEPTOOL_SEARCH_MEMORY"
 ];
 
-const findAction = (tool: string) => {
-    return actions.filter(action => action.toLowerCase().includes(tool.toLowerCase())) || '';
+// Find actions for a specific tool
+const findAction = (tool: string): string[] => {
+    return actions.filter(action => action.toLowerCase().includes(tool.toLowerCase())) || [];
 };
 
-const TOOLS_TO_CREATE = commerceApps.map((app) => ({
+// Prepare the tools to be created
+const TOOLS_TO_CREATE = localTools.map((app) => ({
     key: generateUniqueId(app),
     name: app,
     logo: null,
@@ -72,23 +75,20 @@ const TOOLS_TO_CREATE = commerceApps.map((app) => ({
     description: null
 }));
 
+// Main function to create all tools
 async function main() {
-    // console.log(JSON.stringify(TOOLS_TO_CREATE, null, 2));
     for (const tool of TOOLS_TO_CREATE) {
         await createNewTool(tool);
     }
 }
 
+// Function to create a new tool or update if it already exists
 async function createNewTool(app: any) {
-  
-
     const strapiApp = await getApp(app.key);
     if (strapiApp?.id) {
         console.log("App already exists", app.key);
         return;
     }
-
-
 
     await createOrUpdateApp({
         name: app.name,
@@ -98,25 +98,14 @@ async function createNewTool(app: any) {
         tool_type: 'local',
         website_link: "",
         playground_config: "",
-        actions: [],
+        actions: app.actions,
         triggers: [],
         examples: [],
         tags: [59],
         FAQ: [],
-        //@ts-ignore
-        actions: app.actions,
-        //@ts-ignore
-        triggers: [],
     });
 
     console.log("App created/updated", app.key);
 }
 
 main();
-
-// type ActionOrTrigger = {
-//     name: string;
-//     desc: string;
-//     tag: string;
-//     unique_id: string;
-// };
