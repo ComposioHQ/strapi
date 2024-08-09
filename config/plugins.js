@@ -30,5 +30,52 @@ module.exports = ({ env }) => ({
         { name: 'api::playground-example.playground-example' },
       ],
     },
-  }
+  },
+  "fuzzy-search": {
+    enabled: true,
+    config: {
+      contentTypes: [
+        {
+          uid: "api::tool.tool",
+          modelName: "tool",
+          transliterate: true,
+          fuzzysortOptions: {
+            characterLimit: 30000,
+            threshold: 0.7,
+            limit: 12,
+            keys: [
+              {
+                name: "name",
+                weight: 4,
+              },
+              {
+                name: "description",
+                weight: 1,
+              },
+            ],
+          },
+        },
+        {
+          uid: "api::playground-example.playground-example",
+          modelName: "playground-example",
+          transliterate: true,
+          fuzzysortOptions: {
+            characterLimit: 30000,
+            threshold: 0.7,
+            limit: 12,
+            keys: [
+              {
+                name: "name",
+                weight: 2,
+              },
+              {
+                name: "description",
+                weight: 1,
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
 });
