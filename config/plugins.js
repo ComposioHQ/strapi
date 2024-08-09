@@ -41,16 +41,16 @@ module.exports = ({ env }) => ({
           transliterate: true,
           fuzzysortOptions: {
             characterLimit: 30000,
-            threshold: 0.7,
+            threshold: .6,
             limit: 12,
             keys: [
               {
                 name: "name",
-                weight: 4,
+                weight: .5,
               },
               {
                 name: "description",
-                weight: 1,
+                weight: .1,
               },
             ],
           },
@@ -61,12 +61,12 @@ module.exports = ({ env }) => ({
           transliterate: true,
           fuzzysortOptions: {
             characterLimit: 30000,
-            threshold: 0.7,
+            threshold: .5,
             limit: 12,
             keys: [
               {
                 name: "name",
-                weight: 2,
+                weight: .5,
               },
               {
                 name: "description",
