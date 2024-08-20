@@ -15,5 +15,8 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
-    - name: Run tests
+    - name: intall ts-node
+      run: npm install -g ts-node
+
+    - name: run tools generator
       run: cd workflow/generator && COMPOSIO_API_KEY=cc0fu8lookgq1ov8z4xx9n ts-node sync_tools_from_be.ts
