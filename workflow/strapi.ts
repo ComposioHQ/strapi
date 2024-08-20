@@ -10,7 +10,7 @@ const commonHeaders = {
 }
 const strapiUrl =  "https://cms.composio.dev";
 export async function strapi(url: string) {
-    const STRAPI_URL = process.env.STRAPI_URL || "http://127.0.0.1:1337";
+    const STRAPI_URL = process.env.STRAPI_URL || strapiUrl;
     const { data } = await axios.get(STRAPI_URL + url, commonHeaders);
     return data;
 }
@@ -50,8 +50,11 @@ export const createOrUpdateApp = async (app:{
         const { data: response } = await axios[id ? 'put' : 'post'](`https://cms.composio.dev/api/tools${id ? `/${id}` : ''}`, {data}, commonHeaders);
         return response;
     } catch (error) {
-       console.log(`Could not create or update app ${app.name}`, error);
-        // throw error;
+        if (axios.isAxiosError(error)) {
+            console.error(`Axios error occurred: ${error.message}`, error.response?.data);
+        } else {
+            console.error(`An unexpected error occurred: ${error}`);
+        }
     }
 }
 
